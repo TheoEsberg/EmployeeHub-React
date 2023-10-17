@@ -18,12 +18,11 @@ const LoginForm = () => {
         <div className="cover">
             <h1>Login</h1>
             <div>
-                <input type="text" placeholder="email" value={email} onChange={(x) => setEmail(x.target.value)}/>
-                <input type="password" placeholder="password" value={password} onChange={(x) => setPassword(x.target.value)} />
+                <input type="text" placeholder="E-Mail" value={email} onChange={(x) => setEmail(x.target.value)}/>
+                <input type="password" placeholder="Password" value={password} onChange={(x) => setPassword(x.target.value)} />
             </div>
             <button className="login-btn" onClick={ValidateLogin}>
-                <p>Login</p>
-                <i className="bi bi-arrow-right"></i>
+                <p>Login <i className="bi bi-arrow-right"></i> </p>
             </button>
         </div>
     )

@@ -57,3 +57,13 @@ input:focus {
 .login-btn:active {
     background-color: rgb(66, 77, 114);
 }
+
+@media (prefers-color-scheme: dark){
+    input {
+        background-color: #1f2023;
+    }
+
+    input::placeholder {
+        color: #dadada;
+    }
+}
