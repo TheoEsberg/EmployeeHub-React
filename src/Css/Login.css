@@ -57,6 +57,9 @@ input:focus {
 .login-btn:active {
     background-color: rgb(66, 77, 114);
 }
+.ErrorMessage{
+    color: red;
+}
 
 @media (prefers-color-scheme: dark){
     input {
