@@ -10,7 +10,7 @@ const LoginForm = () => {
     const [password, setPassword] = useState("");
     const navigate = useNavigate(); 
 
-    const [showError, setShowError]=useState(false)
+    const [showError, setShowError] = useState(false)
 
     const ValidateLogin = async () => {
         console.log("Email:", email);
@@ -33,7 +33,7 @@ const LoginForm = () => {
         <div className="cover">
             <h1>Login</h1>
             <div>
-                <input type="text" placeholder="E-Mail" value={email} onChange={(x) => setEmail(x.target.value)}/>
+                <input type="text" placeholder="E-Mail" value={email} onChange={(x) => setEmail(x.target.value)} />
                 <input type="password" placeholder="Password" value={password} onChange={(x) => setPassword(x.target.value)} />
             </div>
             {showError ? <p className="ErrorMessage">Password or Email is Incorrect</p> : null}
