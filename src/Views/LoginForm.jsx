@@ -6,12 +6,12 @@ const LoginForm = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const history = useNavigate(); 
+    const navigate = useNavigate(); 
 
     const ValidateLogin = async () => {
         console.log("Email:", email);
         console.log("Password:", password);
-        history('/loggedIn');
+        navigate('/loggedIn', { state: { email, password } });
     }
 
     return (
