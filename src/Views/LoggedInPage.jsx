@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-const URLBase = "https://localhost:7154"
+import { API_LOGIN } from '../../config.js';
 
 const LoggedInPage = ({ email, password }) => {
     const [data, setData] = useState([]);
@@ -10,7 +10,7 @@ const LoggedInPage = ({ email, password }) => {
 
     useEffect(() => {
         // This will be our call to the API where we get the Employee back if the email and corresponding password is matching
-        fetch(URLBase + '/api/Login', {
+        fetch(API_LOGIN, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
