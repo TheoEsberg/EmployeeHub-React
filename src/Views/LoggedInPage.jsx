@@ -61,12 +61,12 @@ const LoggedInPage = ({ email, password }) => {
         <div className='container'>
             <div className='navbar'>
                 <div className="email-display">
-                    <p>{data.email}</p>
+                    <p><i class="bi bi-person-fill"></i>{data.email}</p>
                 </div>
                 <ul className="nav-links">
-                    <button onClick={() => switchContent('logout')}>Logout</button>
-                    <button onClick={() => switchContent('my-leave')}>My Leave</button>
-                    <button onClick={() => switchContent('apply-leave')}>Apply for Leave</button>
+                    <button onClick={() => switchContent('logout')}> <i class="bi bi-box-arrow-right"></i> Logout</button>
+                    <button onClick={() => switchContent('my-leave')}> <i class="bi bi-folder2-open"></i> My Leave</button>
+                    <button onClick={() => switchContent('apply-leave')}> <i class="bi bi-pen"></i> Apply for Leave</button>
                 </ul>
             </div>
             <main className='content'>
