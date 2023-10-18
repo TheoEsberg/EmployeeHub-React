@@ -5,6 +5,7 @@ import '../Css/loggedIn.css';
 import MyLeaveView from './MyLeaveView';
 import ApplyLeaveView from './ApplyLeaveView';
 import LogoutView from './LogoutView.jsx';
+import AdminView from './AdminView.jsx'
 
 const LoggedInPage = ({ email, password }) => {
     
@@ -24,12 +25,21 @@ const LoggedInPage = ({ email, password }) => {
             body: JSON.stringify(loginData)
         })
         .then((response) => response.json())
-        .then((data) => setData(data))
+        .then((data) => {
+            if(data.isAdmin){
+                setShowAdmin(true)
+            }
+            setData(data)
+            console.log(data)
+        })
         .catch((error) => console.error("Error: ", error));
     }, [email, password]);
 
     //Default view
     const [currentContent, setCurrentContent] = useState('my-leave');
+
+    //Admin view hide/nothide
+    const[showAdmin,setShowAdmin]=useState(false)
     
     const switchContent = (page) => {
         switch (page) {
@@ -41,6 +51,9 @@ const LoggedInPage = ({ email, password }) => {
                 break;
             case 'logout':
                 setCurrentContent('logout');
+                break;
+            case 'admin':
+                setCurrentContent('admin')
                 break;
             default:
                 //If something happens go back to default view (maybe do something else later)
@@ -67,12 +80,14 @@ const LoggedInPage = ({ email, password }) => {
                     <button onClick={() => switchContent('logout')}> <i class="bi bi-box-arrow-right"></i> Logout</button>
                     <button onClick={() => switchContent('my-leave')}> <i class="bi bi-folder2-open"></i> My Leave</button>
                     <button onClick={() => switchContent('apply-leave')}> <i class="bi bi-pen"></i> Apply for Leave</button>
+                    {showAdmin ? <button onClick={()=>switchContent('admin')}>Admin Page</button> : null}
                 </ul>
             </div>
             <main className='content'>
                 {currentContent === 'logout' && <LogoutView />}
                 {currentContent === 'my-leave' && <MyLeaveView />}
                 {currentContent === 'apply-leave' && <ApplyLeaveView />}
+                {currentContent === 'admin' && <AdminView />}
             </main>
         </div>
     );
