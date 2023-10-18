@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Css/MyLeave.css';
+import '../Css/Logout.css';
 
 const LogoutView = () => {
     return (
