@@ -4,7 +4,6 @@ import '../Css/loggedIn.css';
 
 import MyLeaveView from './MyLeaveView';
 import ApplyLeaveView from './ApplyLeaveView';
-import LogoutView from './LogoutView.jsx';
 import AdminView from './AdminView.jsx'
 import LoginForm from './LoginForm.jsx';
 import { useNavigate } from 'react-router-dom';
@@ -22,16 +21,12 @@ const LoggedInPage = ( props ) => {
     const navigate = useNavigate(); 
     
     const switchContent = (page) => {
-
         switch (page) {
             case 'my-leave':
                 setCurrentContent('my-leave');
                 break;
             case 'apply-leave':
                 setCurrentContent('apply-leave');
-                break;
-            case 'logout':
-                setCurrentContent('logout');
                 break;
             case 'admin':
                 setCurrentContent('admin')
@@ -51,16 +46,8 @@ const LoggedInPage = ( props ) => {
             navigate('/')
         } else {
             console.log("Do not logout!");
-            // Handle the case where the user does not want to logout
         }
     };
-
-    // Data Structure
-    // ID: {data.id}
-    // Name: {data.name}
-    // Email: {data.email}
-    // Vacation Days: {data.vacationDays}
-    // Is Admin: {data.isAdmin ? 'Yes' : 'No'}
     
     const checkIfUserIsAdmin = () => { 
         if(props.result.isAdmin){

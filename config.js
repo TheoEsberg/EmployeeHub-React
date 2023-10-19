@@ -1,8 +1,9 @@
-// Configure file for different variables that are used all over the React project!
+//Configure file for different variables that are used all over the React project!
 const PORT = "7154" 
 const API_URL_BASE = 'https://localhost:' + PORT
 
-// Different EndPoints URLs for the API-Calls
+//Different EndPoints URLs for the API-Calls
+//Employee
 const API_CREATE_EMPLOYEE = API_URL_BASE + '/api/employee'
 const API_GET_ALL_EMPLOYEES = API_URL_BASE + '/api/employee'
 const API_GET_SINGLE_EMPLOYEE = API_URL_BASE + '/api/employee/'
