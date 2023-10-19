@@ -87,7 +87,7 @@ const LoggedInPage = ({ email, password }) => {
         <div className='container'>
             <div className='navbar'>
                 <div className="email-display">
-                    <p><i class="bi bi-person-fill"></i>{data.email}</p>
+                    <p><i class="bi bi-person-fill"> </i>{data.email}</p>
                 </div>
                 <ul className="nav-links">
                     <button onClick={() => confirmLogout()}> <i class="bi bi-box-arrow-right"></i> Logout</button>
