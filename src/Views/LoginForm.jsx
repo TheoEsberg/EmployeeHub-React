@@ -8,6 +8,7 @@ const LoginForm = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
     const navigate = useNavigate(); 
 
     const [showError, setShowError] = useState(false)
@@ -19,7 +20,7 @@ const LoginForm = () => {
             "email":email,
             "password":password
         }
-        axios.post(API_LOGIN,data)
+        axios.post(API_LOGIN, data)
         .then((result)=>{
             navigate('/loggedIn', { state: { email, password } });
         })

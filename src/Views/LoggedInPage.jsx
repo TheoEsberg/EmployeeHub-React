@@ -85,9 +85,9 @@ const LoggedInPage = ({ email, password }) => {
             </div>
             <main className='content'>
                 {currentContent === 'logout' && <LogoutView />}
-                {currentContent === 'my-leave' && <MyLeaveView />}
-                {currentContent === 'apply-leave' && <ApplyLeaveView />}
-                {currentContent === 'admin' && <AdminView />}
+                {currentContent === 'my-leave' && <MyLeaveView props={data} />}
+                {currentContent === 'apply-leave' && <ApplyLeaveView props={data} />}
+                {currentContent === 'admin' && <AdminView props={data} />}
             </main>
         </div>
     );

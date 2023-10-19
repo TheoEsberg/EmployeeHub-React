@@ -1,7 +1,10 @@
 import React from 'react';
 import '../Css/MyLeave.css';
 
-const MyLeaveView = () => {
+const MyLeaveView = (props) => {
+
+    console.log(props);
+
     return (
         <div>
             <h1>My Leave View</h1>

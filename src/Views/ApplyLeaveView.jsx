@@ -5,8 +5,10 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-const ApplyLeaveView = () => {
+const ApplyLeaveView = (props) => {
 
+    console.log(props);
+    
     const[LeaveTypeId, setLeaveTypeId]=useState("")
     const[StartDate, setStartDate]=useState("")
     const[EndDate, setEndDate]=useState("")

@@ -1,7 +1,10 @@
 import React from 'react';
 import '../Css/Admin.css';
 
-const ApplyLeaveView = () => {
+const ApplyLeaveView = (props) => {
+
+    console.log(props);
+
     return (
         <div>
             <h1>Admin view</h1>
