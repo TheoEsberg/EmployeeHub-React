@@ -3,7 +3,7 @@ import axios from "axios";
 import { API_GET_ALL_EMPLOYEES, API_GET_ALL_LEAVEREQUESTS } from '../../config';
 import React, { useEffect, useState } from 'react';
 
-const ApplyLeaveView = (props) => {
+const AdminView = (props) => {
 
     console.log(props);
     const [leaveData, setLeaveData] = useState([]);
@@ -78,4 +78,4 @@ const ApplyLeaveView = (props) => {
     );
 }
 
-export default ApplyLeaveView;
+export default AdminView;
