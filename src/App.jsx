@@ -19,9 +19,9 @@ const App = () => {
 
 const LoggedInPageWithProps = () => {
     const location = useLocation();
-    const { email, password } = location.state || {};
+    const { res } = location.state || {};
 
-    return <LoggedInPage email={email} password={password} />;
+    return <LoggedInPage result={res} />;
 }
 
 export default App
