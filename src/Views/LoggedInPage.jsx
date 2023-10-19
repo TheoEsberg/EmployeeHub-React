@@ -49,22 +49,17 @@ const LoggedInPage = ( props ) => {
         }
     };
     
-    const checkIfUserIsAdmin = () => { 
+    useEffect(() => { 
         if(props.result.isAdmin){
             setShowAdmin(true);
         }
-    } 
-    
-    useEffect(() => { 
-        checkIfUserIsAdmin(); 
     }, []) 
     
-
     return (
         <div className='container'>
             <div className='navbar'>
                 <div className="email-display">
-                    <p><i class="bi bi-person-fill"></i>{props.result.email}</p>
+                    <p><i class="bi bi-person-fill"></i> {props.result.email}</p>
                 </div>
                 <ul className="nav-links">
                     <button onClick={() => confirmLogout()}> <i class="bi bi-box-arrow-right"></i> Logout</button>
