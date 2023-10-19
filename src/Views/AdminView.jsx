@@ -1,81 +1,44 @@
 import '../Css/Admin.css';
-import axios from "axios";
-import { API_GET_ALL_EMPLOYEES, API_GET_ALL_LEAVEREQUESTS } from '../../config';
 import React, { useEffect, useState } from 'react';
+
+import RequestView from './SubViews/RequestsView.jsx';
 
 const AdminView = (props) => {
 
     console.log(props);
-    const [leaveData, setLeaveData] = useState([]);
-    const [employeeData, setEmployeeData] = useState([]);
 
+    //Default view
+    const [currentContent, setCurrentContent] = useState('approve-requests');
 
-    useEffect(() => {
-        fetch(API_GET_ALL_LEAVEREQUESTS, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then((response) => response.json())
-        .then((leaveData) => setLeaveData(leaveData))
-        .catch((error) => console.log('ERROR: ' + error))
-    }, []);
-
-    useEffect(() => {
-        fetch(API_GET_ALL_EMPLOYEES, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then((response) => response.json())
-        .then((employeeData) => setEmployeeData(employeeData))
-        .catch((error) => console.log('ERROR: ' + error))
-    }, []);
-
-    const logData = () => {
-        console.log(leaveData);
-        console.log(employeeData);
-    }
+    const switchContent = (page) => {
+        switch (page) {
+            case 'approve-requests':
+                setCurrentContent('approve-requests');
+                break;
+            default:
+                //If something happens go back to default view (maybe do something else later)
+                setCurrentContent('approve-requests');
+                console.log("An error occoured in method : SwitchContent");
+                break;
+        }
+    };
 
     return (
-        <div>
-            <h1>Admin view</h1>
-            <hr />
-            <table className="LR-Table">
-            <thead>
-                <tr>
-                    <th>Employee Name</th>
-                    <th>Leave Type ID</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Message</th>
-                    <th>Accept / Deny</th>
-                </tr>
-            </thead>
-            <tbody>
-                {leaveData.map((item) => {
-                // Find the employee by employeeId
-                const employee = employeeData.find(employee => employee.id === item.employeeId);
-                return (
-                    <tr key={item.id}>
-                        <td>{employee ? employee.name : 'Employee Not Found'}</td>
-                        <td>{item.leaveTypeId}</td>
-                        <td>{new Date(item.startDate).toLocaleDateString()}</td>
-                        <td>{new Date(item.endDate).toLocaleDateString()}</td>
-                        <td><input type="text" name="msg"/></td>
-                        <td>
-                            <button class="accept-btn">Accept</button>
-                            <button class="deny-btn">Deny</button>
-                        </td>
-                    </tr>
-                );
-                })}
-            </tbody>
-            </table>
+        //CSS from LoggedIn.css (somehow) css vodoo magic
+        <div className='container'>
+            <div className='navbar-sub'>
+                <ul className="nav-links">
+                    <button onClick={() => switchContent('approve-requests')}> <i class="bi bi-envelope-paper"></i> Requests</button>
+                    <button onClick={() => switchContent('approve-requests')}> TO BE MADE</button>
+                    <button onClick={() => switchContent('approve-requests')}> TO BE MADE</button>
+                </ul>
+            </div>
+            <main className='content'>
+                {currentContent === 'approve-requests' && <RequestView props={props.props} />}
+            </main>
         </div>
     );
+
 }
 
 export default AdminView;

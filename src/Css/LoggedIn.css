@@ -19,7 +19,6 @@
     justify-content: space-between; 
     align-items: center;
 }
-
 .navbar ul {
     list-style-type: none;
     padding: 0;
@@ -48,9 +47,49 @@
     background-color: rgb(81, 98, 155);
 }
 .navbar button:active {
-    background-color: #1e2a36;
+    background-color: rgb(49, 60, 101);
 }
 
 .content {
     padding: 0;
+}
+
+.navbar-sub {
+    background-color: rgb(81, 106, 175);
+    color: #fff;
+    height: 40px; 
+    width: 100vw;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+.navbar-sub ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.navbar-sub li {
+    display: inline;
+    margin-right: 40px;
+}
+.navbar-sub a {
+    text-decoration: none;
+    color: #fff;
+}
+.navbar-sub p {
+    text-decoration: none;
+    margin-left: 40px;
+}
+.navbar-sub button {
+    width: auto;
+    height: 40px; 
+    border-radius: 0;
+    background-color: rgb(81, 106, 175);
+    color: white;
+}
+.navbar-sub button:hover {
+    background-color: rgb(94, 123, 205);
+}
+.navbar-sub button:active {
+    background-color: rgb(58, 78, 133);
 }
