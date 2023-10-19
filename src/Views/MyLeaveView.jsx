@@ -66,16 +66,16 @@ const MyLeaveView = (props) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {leaveRecords.map((record) => (
-                            <tr key={record.id}>
-                                <td>{getLeaveTypeName(record.leaveTypeId)}</td>
-                                <td>{record.startDate}</td>
-                                <td>{record.endDate}</td>
-                                <td>{record.requestDate}</td>
+                        {leaveRecords.map((item) => (
+                            <tr key={item.id}>
+                                <td>{getLeaveTypeName(item.leaveTypeId)}</td>
+                                <td>{new Date(item.startDate).toLocaleDateString()}</td>
+                                <td>{new Date(item.endDate).toLocaleDateString()}</td>
+                                <td>{new Date(item.requestDate).toLocaleDateString()}</td>
                                 <td>
-                                    {record.pending === -1 ? 'Denied' : record.pending === 0 ? 'Pending' : 'Approved'}
+                                    {item.pending === -1 ? 'Denied' : item.pending === 0 ? 'Pending' : 'Approved'}
                                 </td>
-                                <td><button onClick={() => deleteRequest(record.id)} className='button-my-leave'>Cancel</button></td>
+                                <td><button onClick={() => deleteRequest(item.id)} className='button-my-leave'>Cancel</button></td>
                             </tr>
                         ))}
                     </tbody>

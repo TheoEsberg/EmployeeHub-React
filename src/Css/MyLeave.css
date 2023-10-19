@@ -2,11 +2,11 @@
     padding: 8px 15px;
     border: none;
     border-radius: 4px;
-    background-color: #ff4b5c;
+    background-color: #ac0617;
     color: #fff;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 .button-my-leave:hover {
-    background-color: #942934;
+    background-color: #dd0016;
 }

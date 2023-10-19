@@ -1,0 +1,13 @@
+input {
+    margin-top: 1em;
+    border: none;
+    height: 4em;
+    width: 60%;
+    border-radius: 0.25em;
+    text-align: center;
+    padding: 2em;
+    font-size: medium;
+}
+input:focus {
+    outline-color: rgb(32, 177, 255);
+}
