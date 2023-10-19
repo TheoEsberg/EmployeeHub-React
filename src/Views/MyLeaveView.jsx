@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../Css/MyLeave.css';
 import axios from 'axios';
-import { API_GET_EMPLOYEE_LEAVE_REQUESTS, API_GET_ALL_LEAVE_TYPES, API_DELETE_LEAVE_REQUEST} from '../../config.js';
+import { API_GET_EMPLOYEE_LEAVEREQUESTS, API_GET_ALL_LEAVETYPES, API_DELETE_LEAVEREQUEST} from '../../config.js';
 
 const MyLeaveView = (props) => {
 
@@ -9,7 +9,7 @@ const MyLeaveView = (props) => {
     const [leaveTypes, setLeaveTypes] = useState([]);
 
     useEffect(() => {
-        axios.get(`${API_GET_EMPLOYEE_LEAVE_REQUESTS}${props.props.id}`)
+        axios.get(`${API_GET_EMPLOYEE_LEAVEREQUESTS}${props.props.id}`)
         .then((result) => {
             console.log(result);
             setLeaveRecords(result.data);
@@ -18,7 +18,7 @@ const MyLeaveView = (props) => {
             console.error("Error fetching leave records:", error);
         });
 
-        axios.get(`${API_GET_ALL_LEAVE_TYPES}`)
+        axios.get(`${API_GET_ALL_LEAVETYPES}`)
         .then((result_lt) => {
             console.log("LEAVE TYPES:", result_lt.data);
             setLeaveTypes(result_lt.data);
@@ -36,7 +36,7 @@ const MyLeaveView = (props) => {
     const deleteRequest = (recordId) => {
         let confirmed = window.confirm("Are you sure you want to delete this leave request?");
         if (confirmed) {
-            axios.delete(`${API_DELETE_LEAVE_REQUEST}${recordId}`)
+            axios.delete(`${API_DELETE_LEAVEREQUEST}${recordId}`)
             .then((response) => {
                 console.log(response.data.message);
                 //Filter out the certain record
