@@ -1,0 +1,70 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1 {
+    margin-top: 1em;
+}
+
+hr{
+    margin: auto;
+    width: 70vw;
+    margin-top: 1em;
+}
+
+.LR-Table {
+    border-collapse: collapse;
+    width: 70vw;
+    margin: 2em auto;
+    color: white; /* Set the text color for dark mode */
+}
+  
+.LR-Table th, .LR-Table td {
+    border: 1px solid #333; /* Adjust border color as needed */
+    padding: 8px;
+    text-align: left;
+}
+
+.LR-Table th {
+    background-color: #555; /* Adjust background color for table headers */
+}
+  
+.LR-Table tr:nth-child(even) {
+    background-color: #444; /* Adjust background color for even rows */
+}
+  
+.LR-Table tr:hover {
+    background-color: #333; /* Adjust background color for hover effect */
+}
+
+.LR-Table td input[type="text"] {
+    height: 30px; /* Adjust the height as needed */
+    width: 100%; /* Ensure the input takes the full width of the cell */
+    box-sizing: border-box; /* Include padding in the width */
+    display: block; /* Make the input a block element */
+    margin: 0 auto; /* Center the input horizontally */
+    background-color: #555;
+}
+
+.accept-btn {
+    background-color: rgb(0, 128, 0);
+    margin-left: 2em;
+}
+
+.accept-btn:hover {
+    background-color: rgb(0, 200, 0);
+    transition: all 0.1s ease-in-out;
+}
+
+.deny-btn {
+    background-color: rgb(128, 0, 0);
+    margin-left: 2em;
+}
+
+.deny-btn:hover {
+    background-color: rgb(200, 0, 0);
+    transition: all 0.1s ease-in-out;
+}
+  

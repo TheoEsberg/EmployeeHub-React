@@ -15,8 +15,6 @@ const LoginForm = () => {
 
     const ValidateLogin = async () => {
         event.preventDefault();
-        console.log("Email:", email);
-        console.log("Password:", password);
         const data={
             "email":email,
             "password":password
