@@ -6,9 +6,11 @@ import MyLeaveView from './MyLeaveView';
 import ApplyLeaveView from './ApplyLeaveView';
 import LogoutView from './LogoutView.jsx';
 import AdminView from './AdminView.jsx'
+import LoginForm from './LoginForm.jsx';
+import { useNavigate } from 'react-router-dom';
 
 const LoggedInPage = ({ email, password }) => {
-    
+    const navigate = useNavigate();
     const [data, setData] = useState([]);
     const loginData = {
         Email: email,
@@ -63,6 +65,17 @@ const LoggedInPage = ({ email, password }) => {
         }
     };
 
+    const confirmLogout = () => {
+        const userWantsToLogout = window.confirm("Are you sure you want to logout?");
+        if (userWantsToLogout) {
+            console.log("Logging out!");
+            navigate('/')
+        } else {
+            console.log("Do not logout!");
+            // Handle the case where the user does not want to logout
+        }
+    };
+
     // Data Structure
     // ID: {data.id}
     // Name: {data.name}
@@ -77,7 +90,7 @@ const LoggedInPage = ({ email, password }) => {
                     <p><i class="bi bi-person-fill"></i>{data.email}</p>
                 </div>
                 <ul className="nav-links">
-                    <button onClick={() => switchContent('logout')}> <i class="bi bi-box-arrow-right"></i> Logout</button>
+                    <button onClick={() => confirmLogout()}> <i class="bi bi-box-arrow-right"></i> Logout</button>
                     <button onClick={() => switchContent('my-leave')}> <i class="bi bi-folder2-open"></i> My Leave</button>
                     <button onClick={() => switchContent('apply-leave')}> <i class="bi bi-pen"></i> Apply for Leave</button>
                     {showAdmin ? <button onClick={()=>switchContent('admin')}>Admin Page</button> : null}

@@ -22,7 +22,7 @@ const LoginForm = () => {
         }
         axios.post(API_LOGIN, data)
         .then((result)=>{
-            navigate('/loggedIn', { state: { email, password } });
+            navigate('/LoggedInPage', { state: { email, password } });
         })
         .catch((error)=>{
             setShowError(true)
@@ -31,16 +31,18 @@ const LoginForm = () => {
     }
 
     return (
-        <div className="cover">
-            <h1>Login</h1>
-            <div>
-                <input type="text" placeholder="E-Mail" value={email} onChange={(x) => setEmail(x.target.value)} />
-                <input type="password" placeholder="Password" value={password} onChange={(x) => setPassword(x.target.value)} />
+        <div className="container-1">
+            <div className="cover">
+                <h1>Login</h1>
+                <div>
+                    <input name="E-Mail" type="text" placeholder="E-Mail" value={email} onChange={(x) => setEmail(x.target.value)} />
+                    <input name="Password" type="password" placeholder="Password" value={password} onChange={(x) => setPassword(x.target.value)} />
+                </div>
+                {showError ? <p className="ErrorMessage">Password or Email is Incorrect</p> : null}
+                <button className="login-btn" onClick={ValidateLogin}>
+                    <p>Login <i className="bi bi-arrow-right"></i> </p>
+                </button>
             </div>
-            {showError ? <p className="ErrorMessage">Password or Email is Incorrect</p> : null}
-            <button className="login-btn" onClick={ValidateLogin}>
-                <p>Login <i className="bi bi-arrow-right"></i> </p>
-            </button>
         </div>
     )
 }
