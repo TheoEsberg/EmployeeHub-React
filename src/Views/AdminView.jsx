@@ -42,7 +42,6 @@ const ApplyLeaveView = (props) => {
     return (
         <div>
             <h1>Admin view</h1>
-            {/* <button onClick={logData}>API GET DATA YAAAAYY!</button> */}
             <hr />
             <table className="LR-Table">
             <thead>
@@ -63,8 +62,8 @@ const ApplyLeaveView = (props) => {
                     <tr key={item.id}>
                         <td>{employee ? employee.name : 'Employee Not Found'}</td>
                         <td>{item.leaveTypeId}</td>
-                        <td>{item.startDate}</td>
-                        <td>{item.endDate}</td>
+                        <td>{new Date(item.startDate).toLocaleDateString()}</td>
+                        <td>{new Date(item.endDate).toLocaleDateString()}</td>
                         <td><input type="text" name="msg"/></td>
                         <td>
                             <button class="accept-btn">Accept</button>
