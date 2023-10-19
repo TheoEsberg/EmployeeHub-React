@@ -9,41 +9,18 @@ import AdminView from './AdminView.jsx'
 import LoginForm from './LoginForm.jsx';
 import { useNavigate } from 'react-router-dom';
 
-const LoggedInPage = ({ email, password }) => {
-    const navigate = useNavigate();
-    const [data, setData] = useState([]);
-    const loginData = {
-        Email: email,
-        Password: password 
-    };
+const LoggedInPage = ( props ) => {
 
-    useEffect(() => {
-        //This will be our call to the API where we get the Employee back if the email and corresponding password is matching
-        fetch(API_LOGIN, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(loginData)
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            if(data.isAdmin){
-                setShowAdmin(true)
-            }
-            setData(data)
-            console.log(data)
-        })
-        .catch((error) => console.error("Error: ", error));
-    }, [email, password]);
+    console.log(props);
+
+    //Admin view hide/nothide
+    const[showAdmin, setShowAdmin] = useState(false)
 
     //Default view
     const [currentContent, setCurrentContent] = useState('my-leave');
-
-    //Admin view hide/nothide
-    const[showAdmin,setShowAdmin]=useState(false)
     
     const switchContent = (page) => {
+
         switch (page) {
             case 'my-leave':
                 setCurrentContent('my-leave');
@@ -83,11 +60,22 @@ const LoggedInPage = ({ email, password }) => {
     // Vacation Days: {data.vacationDays}
     // Is Admin: {data.isAdmin ? 'Yes' : 'No'}
     
+    const checkIfUserIsAdmin = () => { 
+        if(props.result.isAdmin){
+            setShowAdmin(true);
+        }
+    } 
+    
+    useEffect(() => { 
+        checkIfUserIsAdmin(); 
+    }, []) 
+    
+
     return (
         <div className='container'>
             <div className='navbar'>
                 <div className="email-display">
-                    <p><i class="bi bi-person-fill"> </i>{data.email}</p>
+                    <p><i class="bi bi-person-fill"></i>{props.result.email}</p>
                 </div>
                 <ul className="nav-links">
                     <button onClick={() => confirmLogout()}> <i class="bi bi-box-arrow-right"></i> Logout</button>
@@ -98,9 +86,9 @@ const LoggedInPage = ({ email, password }) => {
             </div>
             <main className='content'>
                 {currentContent === 'logout' && <LogoutView />}
-                {currentContent === 'my-leave' && <MyLeaveView props={data} />}
-                {currentContent === 'apply-leave' && <ApplyLeaveView props={data} />}
-                {currentContent === 'admin' && <AdminView props={data} />}
+                {currentContent === 'my-leave' && <MyLeaveView props={props.result} />}
+                {currentContent === 'apply-leave' && <ApplyLeaveView props={props.result} />}
+                {currentContent === 'admin' && <AdminView props={props.result} />}
             </main>
         </div>
     );

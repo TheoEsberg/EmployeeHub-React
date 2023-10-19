@@ -21,7 +21,8 @@ const LoginForm = () => {
         }
         axios.post(API_LOGIN, data)
         .then((result)=>{
-            navigate('/LoggedInPage', { state: { email, password } });
+            let res = result.data;
+            navigate('/LoggedInPage', { state: { res } });
         })
         .catch((error)=>{
             setShowError(true)
