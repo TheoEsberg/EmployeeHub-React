@@ -10,9 +10,20 @@ const API_UPDATE_EMPLOYEE = API_URL_BASE + '/api/employee'
 const API_DELETE_EMPLOYEE = API_URL_BASE + '/api/employee/'
 const API_LOGIN = API_URL_BASE + '/api/Login'
 
-//Get relevant employee information
-const API_GET_ALL_LEAVE_REQUESTS = API_URL_BASE + 'api/leaveRequest'
-const API_GET_ALL_SINGLE_REQUESTS = API_URL_BASE + 'api/leaveRequest'
+//Leave Request
+const API_CREATE_LEAVE_REQUEST = API_URL_BASE + '/api/leaveRequest'
+const API_GET_ALL_LEAVE_REQUESTS = API_URL_BASE + '/api/leaveRequest'
+const API_GET_SINGLE_LEAVE_REQUEST = API_URL_BASE + '/api/leaveRequest/'
+const API_GET_EMPLOYEE_LEAVE_REQUESTS = API_URL_BASE + '/api/leaveRequest/employee/'
+const API_UPDATE_LEAVE_REQUEST = API_URL_BASE + '/api/leaveRequest'
+const API_DELETE_LEAVE_REQUEST = API_URL_BASE + '/api/leaveRequest/'
+
+//Leave Type
+const API_CREATE_LEAVE_TYPE = API_URL_BASE + '/api/leaveType'
+const API_GET_ALL_LEAVE_TYPES = API_URL_BASE + '/api/leaveType'
+const API_GET_SINGLE_LEAVE_TYPE = API_URL_BASE + '/api/leaveType/'
+const API_UPDATE_LEAVE_TYPE = API_URL_BASE + '/api/leaveType'
+const API_DELETE_LEAVE_TYPE = API_URL_BASE + '/api/leaveType/'
 
 export { 
     PORT,
@@ -23,6 +34,15 @@ export {
     API_UPDATE_EMPLOYEE,
     API_DELETE_EMPLOYEE,
     API_LOGIN,
+    API_CREATE_LEAVE_REQUEST,
     API_GET_ALL_LEAVE_REQUESTS,
-
+    API_GET_SINGLE_LEAVE_REQUEST,
+    API_GET_EMPLOYEE_LEAVE_REQUESTS,
+    API_UPDATE_LEAVE_REQUEST,
+    API_DELETE_LEAVE_REQUEST,
+    API_CREATE_LEAVE_TYPE,
+    API_GET_ALL_LEAVE_TYPES,
+    API_GET_SINGLE_LEAVE_TYPE,
+    API_UPDATE_LEAVE_TYPE,
+    API_DELETE_LEAVE_TYPE
 }
