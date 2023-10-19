@@ -18,6 +18,7 @@ const LoggedInPage = ( props ) => {
 
     //Default view
     const [currentContent, setCurrentContent] = useState('my-leave');
+    const navigate = useNavigate(); // LUCAS GE FAN I ATT TA BORT DENNA, DU BARA FÖRSTÖR :(
     
     const switchContent = (page) => {
 
