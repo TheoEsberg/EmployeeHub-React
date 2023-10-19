@@ -11,6 +11,14 @@
     align-items: center;
 }
 
+.container-1 {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .cover {
     background-color: rgb(56, 67, 104);
     color: white;
@@ -35,6 +43,7 @@ input {
     text-align: center;
     padding: 2em;
 }
+
 input:focus {
     outline-color: rgb(32, 177, 255);
 }
@@ -51,12 +60,15 @@ input:focus {
     border-radius: 0.25em;
     cursor: pointer;
 }
+
 .login-btn:hover {
     transform: scale(1.02);
 }
+
 .login-btn:active {
     background-color: rgb(66, 77, 114);
 }
+
 .ErrorMessage{
     color: red;
 }

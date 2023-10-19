@@ -11,7 +11,7 @@ const App = () => {
         <Router>
             <Routes>
                 <Route path="/" element={<LoginForm />} />
-                <Route path="/loggedIn" element={<LoggedInPageWithProps />} />
+                <Route path="/LoggedInPage" element={<LoggedInPageWithProps />} />
             </Routes>
         </Router>
     );
