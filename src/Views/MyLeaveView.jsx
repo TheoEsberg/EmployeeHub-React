@@ -50,11 +50,11 @@ const MyLeaveView = (props) => {
     }
     
     return (
-        <div className="container-my-leave">
+        <div>
             <div>
-                <h2>My Leave Records</h2>
-                <br />
-                <table>
+                <h1>My Leave Records</h1>
+                <hr />
+                <table className="LR-Table">
                     <thead>
                         <tr>
                             <th>Leave Type</th>

@@ -35,6 +35,7 @@ const ApplyLeaveView = (props) => {
     return (
         <Fragment>
             <h1>Apply for a Leave Request</h1>
+            <hr />
             <Container>
                 <Row>
                     <Col>

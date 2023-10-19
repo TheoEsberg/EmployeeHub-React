@@ -1,52 +1,3 @@
-.container-my-leave {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.container-my-leave h1 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
-}
-
-.container-my-leave table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-.container-my-leave th, td {
-    padding: 10px 15px;
-    border: 1px solid #ddd;
-}
-
-.container-my-leave th {
-    background-color: #f9f9f9;
-    color: #555;
-    text-align: left;
-}
-
-.container-my-leave tr:hover {
-    background-color: #f6f6f6;
-}
-
-.container-my-leave td {
-    color: #666;
-}
-
-.container-my-leave select {
-    padding: 8px 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: #fff;
-    transition: background-color 0.3s;
-}
-
-.container-my-leave select:hover {
-    background-color: #f6f6f6;
-}
-
 .button-my-leave {
     padding: 8px 15px;
     border: none;
@@ -57,5 +8,5 @@
     transition: background-color 0.3s;
 }
 .button-my-leave:hover {
-    background-color: #e43f50;
+    background-color: #942934;
 }
