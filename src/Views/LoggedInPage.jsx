@@ -93,7 +93,7 @@ const LoggedInPage = ({ email, password }) => {
                     <button onClick={() => confirmLogout()}> <i class="bi bi-box-arrow-right"></i> Logout</button>
                     <button onClick={() => switchContent('my-leave')}> <i class="bi bi-folder2-open"></i> My Leave</button>
                     <button onClick={() => switchContent('apply-leave')}> <i class="bi bi-pen"></i> Apply for Leave</button>
-                    {showAdmin ? <button onClick={()=>switchContent('admin')}>Admin Page</button> : null}
+                    {showAdmin ? <button onClick={()=>switchContent('admin')}><i class="bi bi-gear"></i> Admin Page</button> : null}
                 </ul>
             </div>
             <main className='content'>
