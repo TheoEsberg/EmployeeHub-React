@@ -41,7 +41,7 @@ const RequestView = (props) => {
     
     return (
         <div>
-            <h1>Employeee Requests</h1>
+            <h1>Leave Requests</h1>
             <hr />
             <table className="LR-Table">
             <thead>
