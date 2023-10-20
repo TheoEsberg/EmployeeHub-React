@@ -24,25 +24,20 @@ hr{
     margin: 2em auto;
     color: white; /* Set the text color for dark mode */
 }
-  
 .LR-Table th, .LR-Table td {
     border: 1px solid #333; /* Adjust border color as needed */
     padding: 8px;
     text-align: left;
 }
-
 .LR-Table th {
     background-color: #555; /* Adjust background color for table headers */
-}
-  
+} 
 .LR-Table tr:nth-child(even) {
     background-color: #444; /* Adjust background color for even rows */
-}
-  
+} 
 .LR-Table tr:hover {
     background-color: #333; /* Adjust background color for hover effect */
 }
-
 .LR-Table td input[type="text"] {
     height: 30px; /* Adjust the height as needed */
     width: 100%; /* Ensure the input takes the full width of the cell */
@@ -52,11 +47,47 @@ hr{
     background-color: #555;
 }
 
+/*Leave Type Table*/
+.LT-table-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 2em auto;
+}
+
+.LT-Table {
+    margin: 0em auto;
+    border-collapse: collapse;
+    width: auto;
+    color: white; 
+}
+.LT-Table th, .LT-Table td {
+    border: 1px solid #333;
+    padding: 8px;
+    text-align: left;
+}
+.LT-Table th {
+    background-color: #555; 
+} 
+.LT-Table tr:nth-child(even) {
+    background-color: #444; 
+} 
+.LT-Table tr:hover {
+    background-color: #333; 
+}
+.LT-Table td input[type="text"] {
+    height: 30px; 
+    width: 100%; 
+    box-sizing: border-box; 
+    display: block; 
+    margin: 0 auto; 
+    background-color: #555;
+}
+
 .accept-btn {
     background-color: rgb(0, 128, 0);
     margin-left: 2em;
 }
-
 .accept-btn:hover {
     background-color: rgb(0, 200, 0);
     transition: all 0.1s ease-in-out;
@@ -66,9 +97,108 @@ hr{
     background-color: rgb(128, 0, 0);
     margin-left: 2em;
 }
-
 .deny-btn:hover {
     background-color: rgb(200, 0, 0);
     transition: all 0.1s ease-in-out;
 }
   
+.edit-btn {
+    background-color: rgb(194, 139, 0);
+    margin-left: 0em;
+}
+.edit-btn:hover {
+    background-color:  rgb(233, 167, 0);
+    transition: all 0.1s ease-in-out;
+}
+
+.LT-input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0px;
+}
+.LT-input-group {
+    display: flex;
+    gap: 10px;
+}
+.LT-styled-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    height: 3em;
+    width: 50%;
+    background-color: rgb(25, 33, 58); 
+}
+
+.LT-add-button {
+    margin-bottom: 0rem;
+    margin: 0.2em auto;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding: 10px 20px;
+    height: 2em;
+    background-color: rgb(76, 76, 76);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.LT-add-button:hover {
+    background-color: rgb(116, 116, 116);
+    transition: all 0.1s ease-in-out;
+}
+
+.LT-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.LT-modal-content {
+    width: 300px;
+    height: 300px;
+    padding: 20px;
+    background-color: rgb(36,36,36);
+    border-radius: 4px;
+    position: relative;
+    flex-direction: column;
+}
+.LT-modal-content input {
+    background-color: rgb(25, 33, 58);  
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+}
+.LT-modal-content-close-button {
+    margin-top: 2em;
+    background-color: rgb(128, 0, 0);
+}
+.LT-modal-content-close-button:hover {
+    background-color: rgb(200, 0, 0);
+    transition: all 0.1s ease-in-out;
+}
+
+.LT-modal-content-accept-button {
+    margin-top: 2em;
+    background-color: rgb(0, 128, 0);
+}
+.LT-modal-content-accept-button:hover {
+    background-color: rgb(0, 200, 0);
+    transition: all 0.1s ease-in-out;
+}
+
+.LT-close-button {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
