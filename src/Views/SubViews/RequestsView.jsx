@@ -57,19 +57,19 @@ const RequestView = (props) => {
             <tbody>
                 {leaveData.map((item) => {
                 const employee = employeeData.find(employee => employee.id === item.employeeId);
-                return (
-                    <tr key={item.id}>
-                        <td>{employee ? employee.name : 'Employee Not Found'}</td>
-                        <td>{item.leaveTypeId}</td>
-                        <td>{new Date(item.startDate).toLocaleDateString()}</td>
-                        <td>{new Date(item.endDate).toLocaleDateString()}</td>
-                        <td><input type="text" name="msg"/></td>
-                        <td>
-                            <button class="accept-btn">Accept</button>
-                            <button class="deny-btn">Deny</button>
-                        </td>
-                    </tr>
-                );
+                    return (
+                        <tr key={item.id}>
+                            <td>{employee ? employee.name : 'Employee Not Found'}</td>
+                            <td>{item.leaveTypeId}</td>
+                            <td>{new Date(item.startDate).toLocaleDateString()}</td>
+                            <td>{new Date(item.endDate).toLocaleDateString()}</td>
+                            <td><input type="text" name="msg"/></td>
+                            <td>
+                                <button class="accept-btn">Accept</button>
+                                <button class="deny-btn">Deny</button>
+                            </td>
+                        </tr>
+                    );
                 })}
             </tbody>
             </table>
