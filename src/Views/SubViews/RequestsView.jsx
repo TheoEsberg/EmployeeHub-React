@@ -9,6 +9,7 @@ const RequestView = (props) => {
 
     const [leaveData, setLeaveData] = useState([]);
     const [employeeData, setEmployeeData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true); 
 
     useEffect(() => {
         fetch(API_GET_ALL_LEAVEREQUESTS, {
@@ -31,6 +32,7 @@ const RequestView = (props) => {
         })
         .then((response) => response.json())
         .then((employeeData) => setEmployeeData(employeeData))
+        .then(setIsLoading(false))
         .catch((error) => console.log('ERROR: ' + error))
     }, []);
 
@@ -43,36 +45,38 @@ const RequestView = (props) => {
         <div>
             <h1>Leave Requests</h1>
             <hr />
-            <table className="LR-Table">
-            <thead>
-                <tr>
-                    <th>Employee Name</th>
-                    <th>Leave Type ID</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Message</th>
-                    <th>Accept / Deny</th>
-                </tr>
-            </thead>
-            <tbody>
-                {leaveData.map((item) => {
-                const employee = employeeData.find(employee => employee.id === item.employeeId);
-                    return (
-                        <tr key={item.id}>
-                            <td>{employee ? employee.name : 'Employee Not Found'}</td>
-                            <td>{item.leaveTypeId}</td>
-                            <td>{new Date(item.startDate).toLocaleDateString()}</td>
-                            <td>{new Date(item.endDate).toLocaleDateString()}</td>
-                            <td><input type="text" name="msg"/></td>
-                            <td>
-                                <button class="accept-btn">Accept</button>
-                                <button class="deny-btn">Deny</button>
-                            </td>
-                        </tr>
-                    );
-                })}
-            </tbody>
-            </table>
+            {isLoading ? <h2>Loading...</h2> : ( 
+                <table className="LR-Table">
+                <thead>
+                    <tr>
+                        <th>Employee Name</th>
+                        <th>Leave Type ID</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Message</th>
+                        <th>Accept / Deny</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {leaveData.map((item) => {
+                    const employee = employeeData.find(employee => employee.id === item.employeeId);
+                        return (
+                            <tr key={item.id}>
+                                <td>{employee ? employee.name : 'Employee Not Found'}</td>
+                                <td>{item.leaveTypeId}</td>
+                                <td>{new Date(item.startDate).toLocaleDateString()}</td>
+                                <td>{new Date(item.endDate).toLocaleDateString()}</td>
+                                <td><input type="text" name="msg"/></td>
+                                <td>
+                                    <button class="accept-btn">Accept</button>
+                                    <button class="deny-btn">Deny</button>
+                                </td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
+                </table>
+            )}
         </div>
     );
 
