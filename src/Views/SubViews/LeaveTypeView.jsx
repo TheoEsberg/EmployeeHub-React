@@ -8,9 +8,11 @@ const LeaveTypeView = (props) => {
     const [leaveTypes, setLeaveTypes] = useState([]);
     const [newLeaveType, setNewLeaveType] = useState('');
     const [maxDays, setMaxDays] = useState('');
-    const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingId, setEditingId] = useState(null);
 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(true); 
+    
     useEffect(() => {
         getAllLeaveTypes();
     }, []);
@@ -22,7 +24,10 @@ const LeaveTypeView = (props) => {
 
     const getAllLeaveTypes = () => {
         axios.get(API_GET_ALL_LEAVETYPES)
-        .then(response => { setLeaveTypes(response.data); })
+        .then(response => { 
+            setLeaveTypes(response.data);  
+            setIsLoading(false);  
+        })
         .catch(error => {  console.error('Error getting all leave types:', error); });
     }
 
@@ -65,7 +70,7 @@ const LeaveTypeView = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        //Check if editingId is not null, incase "edit" the leave type
+        //Check if editingId is not null, incase; "edit" the leave type
         //Otherwise go to the add method
         if (editingId) {
             let confirmed = window.confirm("Are you done with updating?");
@@ -84,9 +89,9 @@ const LeaveTypeView = (props) => {
         }
     };
 
-    //Since no id is being parsed when "opening" the modal
-    //in the html handleSubmit will open handleAdd method directly
-    const handleOpenAddModal = () => {
+    //Opens "handleSubmit" but since editIs is null
+    //it'll just open handleAdd
+    const openAddModal = () => {
         clearInputs();
         setEditingId(null); 
         setIsModalOpen(true); 
@@ -102,30 +107,32 @@ const LeaveTypeView = (props) => {
         <div>
             <h1>Leave Types</h1>
             <hr />
-            <div className="LT-table-container">
-                <button className="LT-add-button" onClick={handleOpenAddModal}> Add A New Leave Type </button>
-                <table className="LT-Table">
-                    <thead>
-                        <tr>
-                            <th>Leave Type</th>
-                            <th>Maximum Days</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {leaveTypes.map(item => (
-                            <tr key={item.id}>
-                                <td>{item.name}</td>
-                                <td>{item.maxDays}</td>
-                                <td>
-                                    <button className='edit-btn' onClick={() => handleEdit(item.id)}>Edit</button>
-                                    <button className='deny-btn' onClick={() => handleDelete(item.id)}>Delete</button>
-                                </td>
+            {isLoading ? <h2>Loading...</h2> : (
+                <div className="LT-table-container">
+                    <button className="LT-add-button" onClick={openAddModal}> Add A New Leave Type </button>
+                    <table className="LT-Table">
+                        <thead>
+                            <tr>
+                                <th>Leave Type</th>
+                                <th>Maximum Days</th>
+                                <th>Actions</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            {leaveTypes.map(item => (
+                                <tr key={item.id}>
+                                    <td>{item.name}</td>
+                                    <td>{item.maxDays}</td>
+                                    <td>
+                                        <button className='edit-btn' onClick={() => handleEdit(item.id)}>Edit</button>
+                                        <button className='deny-btn' onClick={() => handleDelete(item.id)}>Delete</button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            )}
             {isModalOpen && (
                 <div className="LT-modal">
                     <div className="LT-modal-content">
