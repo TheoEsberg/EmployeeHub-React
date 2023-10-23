@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../Css/Admin.css';
-import { API_GET_ALL_EMPLOYEES, API_GET_ALL_LEAVEREQUESTS } from '../../../config';
+import axios from "axios";
+import { API_GET_ALL_EMPLOYEES, API_GET_ALL_LEAVEREQUESTS, API_UPDATE_LEAVEREQUEST } from '../../../config';
 
 const RequestView = (props) => {
 
@@ -19,18 +20,25 @@ const RequestView = (props) => {
     const [filterType, setFilterType] = useState('total');
 
     useEffect(() => {
-        //Get all leaverequests
+        getLeaveRequests();
+        getAllEmployees();
+    }, []);
+
+    const getLeaveRequests = () => {
         fetch(API_GET_ALL_LEAVEREQUESTS)
         .then((response) => response.json())
         .then((data) => {
             setLeaveData(data);
+            //Set amount of requests for total, pending etc
             setTotalRequests(data.length);
-            setPendingRequests(data.filter(request => request.status === "pending").length);
-            setAcceptedRequests(data.filter(request => request.status === "accepted").length);
-            setDeniedRequests(data.filter(request => request.status === "denied").length);
+            setPendingRequests(data.filter(request => request.pending === 0).length);
+            setAcceptedRequests(data.filter(request => request.pending === 1).length);
+            setDeniedRequests(data.filter(request => request.pending === -1).length);
         })
         .catch((error) => console.log('ERROR: ' + error));
-        //Get all employees
+    }
+
+    const getAllEmployees = () => {
         fetch(API_GET_ALL_EMPLOYEES)
         .then((response) => response.json())
         .then((employeeData) => {
@@ -38,16 +46,32 @@ const RequestView = (props) => {
             setIsLoading(false);
         })
         .catch((error) => console.log('ERROR: ' + error));
-    }, []);
+    }
+
+    const handlePendingState = (itemId, state, message, inputElem) => {
+        axios.put(API_UPDATE_LEAVEREQUEST, { id: itemId, pending: state, responseMessage: message })
+        .then((response) => {
+            console.log(response.data);
+            sendEmail(message); 
+            if (inputElem) { inputElem.value = ''; } //Clear input
+            getLeaveRequests(); //Update display
+        })
+        .catch(error => console.log(error));
+    }
+
+    //Not yet implemented
+    const sendEmail = (message) => {
+        console.log("E-Mail : " + message);
+    }
 
     const filteredData = () => {
         switch(filterType) {
             case 'pending': 
-                return leaveData.filter(request => request.status === "pending");
+                return leaveData.filter(request => request.pending === 0);
             case 'accepted': 
-                return leaveData.filter(request => request.status === "accepted");
+                return leaveData.filter(request => request.pending === 1);
             case 'denied': 
-                return leaveData.filter(request => request.status === "denied");
+                return leaveData.filter(request => request.pending === -1);
             default: 
                 return leaveData;
         }
@@ -61,7 +85,7 @@ const RequestView = (props) => {
                 <button onClick={() => setFilterType('total')}> {totalRequests}<br/>All Requests</button>
                 <button onClick={() => setFilterType('pending')}> {pendingRequests}<br/>Pending Requests</button>
                 <button onClick={() => setFilterType('accepted')}> {acceptedRequests}<br/>Approved Requests</button>
-                <button onClick={() => setFilterType('denied')}> {deniedRequests}<br/>Rejected Requests</button>
+                <button onClick={() => setFilterType('denied')}> {deniedRequests}<br/>Denied Requests</button>
             </div>
             {isLoading ? <h2>Loading...</h2> : (
                 <table className="LR-Table">
@@ -69,6 +93,7 @@ const RequestView = (props) => {
                         <tr>
                             <th>Employee Name</th>
                             <th>Leave Type ID</th>
+                            <th>Status</th>
                             <th>Start Date</th>
                             <th>End Date</th>
                             <th>Message</th>
@@ -83,12 +108,28 @@ const RequestView = (props) => {
                                 <tr key={item.id}>
                                     <td>{employee ? employee.name : 'Employee Not Found'}</td>
                                     <td>{item.leaveTypeId}</td>
+                                    <td>{item.pending === 0 ? "Pending" : (item.pending === 1 ? "Approved" : "Denied")}</td>
                                     <td>{new Date(item.startDate).toLocaleDateString()}</td>
                                     <td>{new Date(item.endDate).toLocaleDateString()}</td>
-                                    <td><input type="text" name="msg"/></td>
+                                    <td><input type="text" name={`msg-${item.id}`}/></td>
                                     <td>
-                                        <button className="accept-btn">Accept</button>
-                                        <button className="deny-btn">Deny</button>
+                                        {/*the id of the itemblock, pending state of it (-1 Denied, 0 Pending, 1 Approved), message in input*/}
+                                        <button className="accept-btn" 
+                                            onClick={() => {
+                                                const inputElem = document.querySelector(`input[name="msg-${item.id}"]`);
+                                                const message = inputElem ? inputElem.value : "";
+                                                handlePendingState(item.id, 1, message, inputElem);
+                                            }}>
+                                            Accept
+                                        </button>
+                                        <button className="deny-btn" 
+                                            onClick={() => {
+                                                const inputElem = document.querySelector(`input[name="msg-${item.id}"]`);
+                                                const message = inputElem ? inputElem.value : "";
+                                                handlePendingState(item.id, -1, message, inputElem);
+                                            }}>
+                                            Deny
+                                        </button>
                                     </td>
                                 </tr>
                             );

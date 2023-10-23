@@ -66,6 +66,19 @@ hr{
     background-color: rgb(117, 154, 255);
 }
 
+@media (max-width: 750px) {
+    .request-counts {
+        width: 100%;
+        margin: 20px 0; 
+        justify-content: center;
+        flex-direction: column;
+    }
+    .request-counts button {
+        width: 50%;
+        margin-top: 15px;           
+    }
+}
+
 /*Leave Type Table*/
 .LT-table-container {
     display: flex;
