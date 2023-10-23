@@ -1,5 +1,5 @@
-import React, { Fragment, useState } from 'react';
-import { API_CREATE_LEAVEREQUEST } from '../../config';
+import React, { Fragment, useEffect, useState } from 'react';
+import { API_CREATE_LEAVEREQUEST, API_GET_ALL_LEAVETYPES } from '../../config';
 import '../Css/ApplyLeave.css';
 import axios from 'axios';
 
@@ -10,10 +10,20 @@ import Col from 'react-bootstrap/Col';
 const ApplyLeaveView = (props) => {
 
     console.log(props);
-    
+    const [LeaveTypes, setLeaveTypes] = useState([]);
     const[LeaveTypeId, setLeaveTypeId]=useState("")
     const[StartDate, setStartDate]=useState("")
     const[EndDate, setEndDate]=useState("")
+
+    useEffect(() => {
+        axios.get(API_GET_ALL_LEAVETYPES)
+            .then((result) => {
+                setLeaveTypes(result.data);
+            })
+            .catch((error) => {
+                console.log('Error fetching LeaveTypes: ', error)
+            });
+    }, []);
 
     const handleAdd=()=>{
         const data={
@@ -39,8 +49,18 @@ const ApplyLeaveView = (props) => {
             <Container>
                 <Row>
                     <Col>
-                        <input type="number" className="form-control" placeholder="Enter LeaveTypeID" value={LeaveTypeId} onChange={(x)=> setLeaveTypeId(x.target.value)}/>
+                        <select className='form-control' value={LeaveTypeId} onChange={(e) => setLeaveTypeId(e.target.value)}>
+                            <option value="">Select LeaveType</option>
+                            {LeaveTypes.map((leaveType) => (
+                                <option key={leaveType.id} value={leaveType.id}>
+                                    {leaveType.name}
+                                </option>
+                            ))}
+                        </select>
                     </Col>
+                    {/* <Col>
+                        <input type="number" className="form-control" placeholder="Enter LeaveTypeID" value={LeaveTypeId} onChange={(x)=> setLeaveTypeId(x.target.value)}/>
+                    </Col> */}
                     <Col>
                         <input type="date" className="form-control" placeholder="Enter Start Date" value={StartDate} onChange={(x)=> setStartDate(x.target.value)}/>
                     </Col>

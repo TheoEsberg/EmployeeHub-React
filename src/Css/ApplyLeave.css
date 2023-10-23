@@ -7,7 +7,22 @@ input {
     text-align: center;
     padding: 2em;
     font-size: medium;
+    color: #fff;
 }
+
+.form-control {
+    color: white;
+    margin-top: 1em;
+    border: none;
+    height: 4em;
+    width: 60%;
+    text-align: center;
+    border-radius: 0.25em;
+    font-size: small;
+    background-color: #1f2023;
+}
+
+
 input:focus {
     outline-color: rgb(32, 177, 255);
 }
