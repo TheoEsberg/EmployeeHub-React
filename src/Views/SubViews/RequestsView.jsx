@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../Css/Admin.css';
 import axios from "axios";
-import { API_GET_ALL_EMPLOYEES, API_GET_ALL_LEAVEREQUESTS, API_UPDATE_LEAVEREQUEST } from '../../../config';
+import { API_GET_ALL_EMPLOYEES, API_GET_ALL_LEAVEREQUESTS, API_SEND_EMAIL, API_UPDATE_LEAVEREQUEST } from '../../../config';
 
 const RequestView = (props) => {
 
@@ -48,10 +48,11 @@ const RequestView = (props) => {
         .catch((error) => console.log('ERROR: ' + error));
     }
 
-    const handlePendingState = (itemId, state, message, inputElem) => {
+    const handlePendingState = (itemId, state, message, inputElem, email) => {
         axios.put(API_UPDATE_LEAVEREQUEST, { id: itemId, pending: state, responseMessage: message })
         .then((response) => {
             console.log(response.data);
+            console.log("EMail: ", email);
             sendEmail(message); 
             if (inputElem) { inputElem.value = ''; } //Clear input
             getLeaveRequests(); //Update display
@@ -60,9 +61,23 @@ const RequestView = (props) => {
     }
 
     //Not yet implemented
-    const sendEmail = (message) => {
-        console.log("E-Mail : " + message);
-    }
+    const sendEmail = (to, subject, message) => {
+        message = message || "Ask Admin";
+
+        const emailData = {
+            to: to,
+            subject: subject,
+            body: message
+        };
+
+        axios.post(API_SEND_EMAIL, emailData)
+            .then((response) => {
+                console.log(response.data)
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
 
     const filteredData = () => {
         switch(filterType) {
@@ -118,6 +133,7 @@ const RequestView = (props) => {
                                             onClick={() => {
                                                 const inputElem = document.querySelector(`input[name="msg-${item.id}"]`);
                                                 const message = inputElem ? inputElem.value : "";
+                                                sendEmail(employee.email, "Approval Notification", message);
                                                 handlePendingState(item.id, 1, message, inputElem);
                                             }}>
                                             Accept
@@ -126,6 +142,7 @@ const RequestView = (props) => {
                                             onClick={() => {
                                                 const inputElem = document.querySelector(`input[name="msg-${item.id}"]`);
                                                 const message = inputElem ? inputElem.value : "";
+                                                sendEmail(employee.email, "Denial Notification", message);
                                                 handlePendingState(item.id, -1, message, inputElem);
                                             }}>
                                             Deny

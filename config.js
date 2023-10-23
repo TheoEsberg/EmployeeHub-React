@@ -9,7 +9,12 @@ const API_GET_ALL_EMPLOYEES = API_URL_BASE + '/api/employee'
 const API_GET_SINGLE_EMPLOYEE = API_URL_BASE + '/api/employee/'
 const API_UPDATE_EMPLOYEE = API_URL_BASE + '/api/employee'
 const API_DELETE_EMPLOYEE = API_URL_BASE + '/api/employee/'
+
+// Login
 const API_LOGIN = API_URL_BASE + '/api/Login'
+
+// SendMail
+const API_SEND_EMAIL = API_URL_BASE + '/api/SendMail'
 
 //Leave Request
 const API_CREATE_LEAVEREQUEST = API_URL_BASE + '/api/leaveRequest'
@@ -46,6 +51,7 @@ export {
     API_GET_ALL_LEAVETYPES,
     API_GET_SINGLE_LEAVETYPE,
     API_UPDATE_LEAVETYPE,
-    API_DELETE_LEAVETYPE
+    API_DELETE_LEAVETYPE,
+    API_SEND_EMAIL
 }
 
