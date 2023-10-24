@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import RequestView from './SubViews/RequestsView.jsx';
 import EmployeeView from './SubViews/EmployeeView';
 import LeaveTypeView from './SubViews/LeaveTypeView';
+import LeaveTimeView from './SubViews/LeaveTimeView';
 
 const AdminView = (props) => {
 
@@ -23,6 +24,9 @@ const AdminView = (props) => {
             case 'leavetype':
                 setCurrentContent('leavetype');
                 break;
+            case 'leavetime':
+                setCurrentContent('leavetime');
+                break;
             default:
                 setCurrentContent('approve-requests');
                 console.log("An error occoured in method : SwitchContent");
@@ -37,6 +41,7 @@ const AdminView = (props) => {
                 <ul className="nav-links">
                     <button onClick={() => switchContent('approve-requests')}> <i class="bi bi-envelope-paper"></i> Requests</button>
                     <button onClick={() => switchContent('employees')}> <i class="bi bi-person-gear"></i> Employees</button>
+                    <button onClick={() => switchContent('leavetime')}> <i class="bi bi-calendar"></i> Leave Time</button>
                     <button onClick={() => switchContent('leavetype')}> <i class="bi bi-list-ul"></i> Leave Types</button>
                 </ul>
             </div>
@@ -44,6 +49,7 @@ const AdminView = (props) => {
                 {currentContent === 'approve-requests' && <RequestView props={props.props} />}
                 {currentContent === 'employees' && <EmployeeView props={props.props} />}
                 {currentContent === 'leavetype' && <LeaveTypeView props={props.props} />}
+                {currentContent === 'leavetime' && <LeaveTimeView props={props.props} />}
             </main>
         </div>
     );
