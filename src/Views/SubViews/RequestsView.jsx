@@ -128,14 +128,14 @@ const RequestView = (props) => {
                                     <td>{new Date(item.endDate).toLocaleDateString()}</td>
                                     <td><input type="text" name={`msg-${item.id}`}/></td>
                                     <td>
-                                        {/*the id of the itemblock, pending state of it (-1 Denied, 0 Pending, 1 Approved), message in input*/}
                                         <button className="accept-btn" 
                                             onClick={() => {
                                                 const inputElem = document.querySelector(`input[name="msg-${item.id}"]`);
                                                 const message = inputElem ? inputElem.value : "";
                                                 sendEmail(employee.email, "Approval Notification", message);
                                                 handlePendingState(item.id, 1, message, inputElem);
-                                            }}>
+                                            }}
+                                            style={{ display: item.pending === 0 ? "" : "none" }}>
                                             Accept
                                         </button>
                                         <button className="deny-btn" 
@@ -144,8 +144,19 @@ const RequestView = (props) => {
                                                 const message = inputElem ? inputElem.value : "";
                                                 sendEmail(employee.email, "Denial Notification", message);
                                                 handlePendingState(item.id, -1, message, inputElem);
-                                            }}>
+                                            }}
+                                            style={{ display: item.pending === 0 ? "" : "none" }}>
                                             Deny
+                                        </button>
+                                        <button className="edit-btn-style2" 
+                                            onClick={() => {
+                                                const inputElem = document.querySelector(`input[name="msg-${item.id}"]`);
+                                                const message = inputElem ? inputElem.value : "";
+                                                sendEmail(employee.email, "Edit Notification", message);
+                                                handlePendingState(item.id, 0, message, inputElem); //Set it back to pending when pressed :D
+                                            }}
+                                            style={{ display: item.pending === 0 ? "none" : "" }}>
+                                            Edit
                                         </button>
                                     </td>
                                 </tr>

@@ -143,6 +143,15 @@ hr{
     transition: all 0.1s ease-in-out;
 }
 
+.edit-btn-style2 {
+    background-color: rgb(194, 139, 0);
+    margin-left: 2em;
+}
+.edit-btn-style2:hover {
+    background-color:  rgb(233, 167, 0);
+    transition: all 0.1s ease-in-out;
+}
+
 .LT-input-container {
     display: flex;
     justify-content: center;
