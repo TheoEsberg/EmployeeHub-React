@@ -15,6 +15,8 @@ const ApplyLeaveView = (props) => {
     const[StartDate, setStartDate]=useState("")
     const[EndDate, setEndDate]=useState("")
 
+    const [showError, setShowError] = useState(false)
+
     useEffect(() => {
         axios.get(API_GET_ALL_LEAVETYPES)
             .then((result) => {
@@ -38,6 +40,7 @@ const ApplyLeaveView = (props) => {
             window.alert("A new LeaveRequest was Created")
         })
         .catch((error)=>{
+            setShowError(true)
             console.log("An error with adding a LeaveRequest")
         })
     }
@@ -67,6 +70,7 @@ const ApplyLeaveView = (props) => {
                     <Col>
                         <input type="date" className="form-control" placeholder="Enter End Date" value={EndDate} onChange={(x)=> setEndDate(x.target.value)}/>
                     </Col>
+                    {showError ? <p className="ErrorMessage">Cant put in more days than you have avaible</p> : null}
                     <br></br>
                     <Col>
                         <button className='btn btn-primary' onClick={()=>handleAdd()}>Submit Leave Request</button>
