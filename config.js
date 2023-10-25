@@ -31,6 +31,8 @@ const API_GET_SINGLE_LEAVETYPE = API_URL_BASE + '/api/leaveType/'
 const API_UPDATE_LEAVETYPE = API_URL_BASE + '/api/leaveType'
 const API_DELETE_LEAVETYPE = API_URL_BASE + '/api/leaveType/'
 
+//Used Leave Days
+const API_GET_ALL_USEDLEAVEDAYS_EMPLOYEE = API_URL_BASE + '/api/usedLeaveDays/employee/'
 
 export { 
     PORT,
@@ -52,6 +54,7 @@ export {
     API_GET_SINGLE_LEAVETYPE,
     API_UPDATE_LEAVETYPE,
     API_DELETE_LEAVETYPE,
-    API_SEND_EMAIL
+    API_SEND_EMAIL,
+    API_GET_ALL_USEDLEAVEDAYS_EMPLOYEE
 }
 

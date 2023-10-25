@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import '../Css/MyLeave.css';
 import axios from 'axios';
-import { API_GET_EMPLOYEE_LEAVEREQUESTS, API_GET_ALL_LEAVETYPES, API_DELETE_LEAVEREQUEST} from '../../config.js';
+import { API_GET_EMPLOYEE_LEAVEREQUESTS, API_GET_ALL_LEAVETYPES, API_DELETE_LEAVEREQUEST, API_GET_ALL_USEDLEAVEDAYS_EMPLOYEE} from '../../config.js';
 
 const MyLeaveView = (props) => {
 
     const [leaveRecords, setLeaveRecords] = useState([]);
+    const [usedLeaveDays, setUsedLeaveDays] = useState([])
     const [leaveTypes, setLeaveTypes] = useState([]);
 
     useEffect(() => {
@@ -17,6 +18,14 @@ const MyLeaveView = (props) => {
         .catch((error) => {
             console.error("Error fetching leave records:", error);
         });
+
+        axios.get(`${API_GET_ALL_USEDLEAVEDAYS_EMPLOYEE}${props.props.id}`)
+        .then((result_uld)=>{
+            setUsedLeaveDays(result_uld.data)
+        })
+        .catch((error)=>{
+            console.error("Error fetching UsedLeaveDays:",error)
+        })
 
         axios.get(`${API_GET_ALL_LEAVETYPES}`)
         .then((result_lt) => {
@@ -51,6 +60,27 @@ const MyLeaveView = (props) => {
     
     return (
         <div>
+            <div>
+                <h1>My Leave Allocation</h1>
+                <hr />
+                <table className='LR-Table'>
+                    <thead>
+                        <tr>
+                            <th>Leave Type</th>
+                            <th>Days left</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {usedLeaveDays.map((item)=>(
+                            <tr key={item.id}>
+                                <td>{getLeaveTypeName(item.leaveTypeId)}</td>
+                                <td>{item.days}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+            <hr />
             <div>
                 <h1>My Leave Records</h1>
                 <hr />
