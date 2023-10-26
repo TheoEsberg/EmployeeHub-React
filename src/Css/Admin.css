@@ -243,3 +243,98 @@ hr{
     cursor: pointer;
 }
 
+/*Leave time*/
+.leave-time-container {
+    width: 80vw;  
+    margin: 0 auto; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+    text-align: left;
+}
+
+.date-picker-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-wrap: nowrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.date-picker-container label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: auto;
+}
+
+.date-picker-container label p {
+    padding-right: 10px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: red; */
+    padding-top: 5px;
+    padding-right: 10px;
+}
+
+/* 
+.date-picker-container label input {
+    padding-right: 10px;
+    width: 340px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5px;
+} */
+
+
+.leave-action-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* width: 100%; */
+    max-width: auto;
+    margin-bottom: 20px;
+}
+
+.leave-time-container input, .leave-time-container select, .leave-time-container button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.leave-time-container input {
+    width: 100%;
+    margin-right: 50px; 
+}
+
+.leave-time-container select {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.leave-time-container button {
+    background-color: #444; 
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.leave-time-container button:hover {
+    background-color: #666; 
+}
+
+.leave-days {
+    margin-top: 20px;
+    background-color: rgb(81, 106, 175);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+
