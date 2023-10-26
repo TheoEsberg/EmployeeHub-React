@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../Css/Admin.css';
 import axios from "axios";
-import { API_GET_ALL_EMPLOYEES, API_GET_ALL_LEAVEREQUESTS, API_SEND_EMAIL, API_UPDATE_LEAVEREQUEST } from '../../../config';
+import { API_GET_ALL_EMPLOYEES, API_GET_ALL_LEAVEREQUESTS, API_Get_ALL_USEDLEAVEDAYS, API_SEND_EMAIL, API_UPDATE_LEAVEREQUEST } from '../../../config';
 
 const RequestView = (props) => {
 
@@ -9,6 +9,7 @@ const RequestView = (props) => {
     
     const [leaveData, setLeaveData] = useState([]);
     const [employeeData, setEmployeeData] = useState([]);
+    const [usedDaysData, setUsedDaysData] = useState([]);
     const [isLoading, setIsLoading] = useState(true); 
 
     const [totalRequests, setTotalRequests] = useState(0);
@@ -22,6 +23,7 @@ const RequestView = (props) => {
     useEffect(() => {
         getLeaveRequests();
         getAllEmployees();
+        getAllDaysLeft();
     }, []);
 
     const getLeaveRequests = () => {
@@ -46,6 +48,16 @@ const RequestView = (props) => {
             setIsLoading(false);
         })
         .catch((error) => console.log('ERROR: ' + error));
+    }
+
+    const getAllDaysLeft=()=>{
+        axios.get(API_Get_ALL_USEDLEAVEDAYS)
+        .then((response)=>{
+            setUsedDaysData(response.data)
+        })
+        .catch((error)=>{
+            console.log(error)
+        })
     }
 
     const handlePendingState = (itemId, state, message, inputElem, email) => {
@@ -108,6 +120,7 @@ const RequestView = (props) => {
                         <tr>
                             <th>Employee Name</th>
                             <th>Leave Type ID</th>
+                            <th>Days left</th>
                             <th>Status</th>
                             <th>Start Date</th>
                             <th>End Date</th>
@@ -119,10 +132,13 @@ const RequestView = (props) => {
                         {filteredData().map((item) => {
                             //Match employee id and leaverequest id from filterData (leaveData)
                             const employee = employeeData.find(employee => employee.id === item.employeeId);
+                            const days=usedDaysData.find(x=>x.employeeId===item.employeeId && x.leaveTypeId===item.leaveTypeId)
+                            console.log(days)
                             return (
                                 <tr key={item.id}>
                                     <td>{employee ? employee.name : 'Employee Not Found'}</td>
                                     <td>{item.leaveTypeId}</td>
+                                    <td>{days ? days.days : 'Days Not Found'}</td>
                                     <td>{item.pending === 0 ? "Pending" : (item.pending === 1 ? "Approved" : "Denied")}</td>
                                     <td>{new Date(item.startDate).toLocaleDateString()}</td>
                                     <td>{new Date(item.endDate).toLocaleDateString()}</td>
