@@ -49,13 +49,44 @@ const LeaveTimeView = () => {
 
         return { typeId: type.id, total, typeName: type.name};
     });
-
     //Just the total amount of leavetime allocated
     const totalAcceptedLeaveTimeForAll = totalsForEachType.reduce((sum, typeTotal) => sum + typeTotal.total, 0);
     
-    const saveToFile = () => {
-        console.log("saved.");
+    const saveToTXTFile = () => {
+        
+        //Writes out at the top of the page a "cleaner" date thanks to ".toISOString().substr(0, 10)"
+        let content = `Between the dates: ${startDate.toISOString().substr(0, 10)} - ${endDate.toISOString().substr(0, 10)}\n\n`;
+
+        //If "all" is selected set content as total and every leavetype
+        if (selectedLeaveType === 'all') {
+            content += `${totalAcceptedLeaveTimeForAll} days of accepted leave for all types.\n`;
+            totalsForEachType.forEach(typeTotal => {
+                content += `${typeTotal.total} days of accepted leave for ${typeTotal.typeName}.\n`;
+            });
+        } 
+        //else just check what type its on
+        else {
+            const selectedTypeTotal = totalsForEachType.find(type => type.typeId === parseInt(selectedLeaveType, 10))?.total || 0;
+            const selectedTypeName = leaveTypes.find(type => type.id === parseInt(selectedLeaveType, 10))?.name || 'Unknown Type';
+            content += `${selectedTypeTotal} days of accepted leave for ${selectedTypeName}.\n`;
+        }
+    
+        //Create a new blob object containing the content with the type : plain text
+        const blob = new Blob([content], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+
+        const anchor = document.createElement('a'); //Creates an "a" element on the document
+
+        anchor.href = url;                 //Assign the generated URL to the "a" we just created's href attribute
+        anchor.download = 'leave-data.txt';//Name of the file we download
+
+        document.body.appendChild(anchor); //"add" the anchor element to the documents body
+
+        anchor.click();                    //Presses the anchor we created so we trigger the download
+        URL.revokeObjectURL(url);          //Revoke the url when we dont need it
+        document.body.removeChild(anchor); //Removes the anchor when we're done with it
     };
+    
 
     return (
         <div className="leave-time-container">
@@ -79,7 +110,7 @@ const LeaveTimeView = () => {
                         <option key={index} value={type.id}>{type.name}</option>
                     ))}
                 </select>
-                <button onClick={saveToFile}>Save to File</button>
+                <button onClick={saveToTXTFile}>Save To File</button>
             </div>
             <div className="leave-days">
                 {selectedLeaveType === 'all' ? 
