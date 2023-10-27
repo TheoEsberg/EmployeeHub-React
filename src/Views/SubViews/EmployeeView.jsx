@@ -31,7 +31,6 @@ const EmployeeView = (props) => {
                             <th>ID</th>
                             <th>Employee Name</th>
                             <th>Email</th>
-                            <th>Vacation Days</th>
                             <th>Is Admin</th>
                         </tr>
                     </thead>
@@ -41,7 +40,6 @@ const EmployeeView = (props) => {
                                 <td>{item.id}</td>
                                 <td>{item.name}</td>
                                 <td>{item.email}</td>
-                                <td>{item.vacationDays}</td>
                                 <td>{item.isAdmin ? "Yes" : "No"}</td>
                             </tr>
                         ))}
