@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../Css/Admin.css';
 import axios from "axios";
-import { API_GET_ALL_EMPLOYEES, API_GET_ALL_LEAVEREQUESTS, API_Get_ALL_USEDLEAVEDAYS, API_SEND_EMAIL, API_UPDATE_LEAVEREQUEST } from '../../../config';
+import { API_DELETE_LEAVEREQUEST, API_GET_ALL_EMPLOYEES, API_GET_ALL_LEAVEREQUESTS, API_Get_ALL_USEDLEAVEDAYS, API_SEND_EMAIL, API_UPDATE_LEAVEREQUEST } from '../../../config';
 
 const RequestView = (props) => {
 
@@ -40,6 +40,15 @@ const RequestView = (props) => {
         .catch((error) => console.log('ERROR: ' + error));
     }
 
+    const deleteLeaveRequest = (id) => {
+        axios.delete(API_DELETE_LEAVEREQUEST + id)
+        .then((response) => {
+            console.log(response.data);
+            getLeaveRequests();
+        })
+        .catch((error) => console.log("ERROR: " + error));
+    }
+    
     const getAllEmployees = () => {
         fetch(API_GET_ALL_EMPLOYEES)
         .then((response) => response.json())
@@ -173,6 +182,14 @@ const RequestView = (props) => {
                                             }}
                                             style={{ display: item.pending === 0 ? "none" : "" }}>
                                             Edit
+                                        </button>
+                                        <button className="deny-btn" onClick={() => {
+                                            var deleteConfirm = window.confirm("Are you sure you want to delete this?");
+                                            if(deleteConfirm) {
+                                                deleteLeaveRequest(item.id);
+                                            } 
+                                        }}
+                                        style={{ display: item.pending === 0 ? "none" : "" }}> Delete
                                         </button>
                                     </td>
                                 </tr>
