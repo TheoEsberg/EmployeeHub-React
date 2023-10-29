@@ -3,11 +3,12 @@
 EmployeeHub-React is a web application designed to streamline employee management tasks. It was built using React.
 
 ## Website
-[React Website](https://lemon-desert-0bad16303.4.azurestaticapps.net/)
+[Live Website](https://lemon-desert-0bad16303.4.azurestaticapps.net/)
 
 ## Example Credentials
-email - user@example.com
-password - emil
+📧 Email: user@example.com 
+<br>
+🔑 Password: emil
 
 ## Created By
 - [Theo Esberg](https://github.com/TheoEsberg)
