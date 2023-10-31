@@ -1,6 +1,9 @@
 //Configure file for different variables that are used all over the React project!
+
+//Uncomment this if you want to local host the website and database
 // const PORT = "7154" 
 // const API_URL_BASE = 'https://localhost:' + PORT
+//And comment this
 const API_URL_BASE = 'sut22employeeapi.azurewebsites.net';
 
 //Different EndPoints URLs for the API-Calls
@@ -34,7 +37,7 @@ const API_DELETE_LEAVETYPE = API_URL_BASE + '/api/leaveType/'
 
 //Used Leave Days
 const API_GET_ALL_USEDLEAVEDAYS_EMPLOYEE = API_URL_BASE + '/api/usedLeaveDays/employee/'
-const API_Get_ALL_USEDLEAVEDAYS=API_URL_BASE + '/api/usedLeaveDays'
+const API_Get_ALL_USEDLEAVEDAYS = API_URL_BASE + '/api/usedLeaveDays'
 
 export { 
     // PORT,

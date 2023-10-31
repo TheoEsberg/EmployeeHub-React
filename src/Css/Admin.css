@@ -28,6 +28,7 @@ hr{
     border: 1px solid #333; /* Adjust border color as needed */
     padding: 8px;
     text-align: left;
+    background-color: #242;
 }
 .LR-Table th {
     background-color: #555; /* Adjust background color for table headers */
