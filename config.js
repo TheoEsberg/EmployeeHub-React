@@ -1,6 +1,7 @@
 //Configure file for different variables that are used all over the React project!
-const PORT = "7154" 
-const API_URL_BASE = 'https://localhost:' + PORT
+// const PORT = "7154" 
+// const API_URL_BASE = 'https://localhost:' + PORT
+const API_URL_BASE = 'sut22employeeapi.azurewebsites.net';
 
 //Different EndPoints URLs for the API-Calls
 //Employee
@@ -36,7 +37,7 @@ const API_GET_ALL_USEDLEAVEDAYS_EMPLOYEE = API_URL_BASE + '/api/usedLeaveDays/em
 const API_Get_ALL_USEDLEAVEDAYS=API_URL_BASE + '/api/usedLeaveDays'
 
 export { 
-    PORT,
+    // PORT,
     API_URL_BASE,
     API_CREATE_EMPLOYEE,
     API_GET_ALL_EMPLOYEES,
